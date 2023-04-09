@@ -718,9 +718,9 @@ cdef class HiddenMarkovModel(GraphModel):
 					p = round(p, precision)
 					G.add_edge(state.name, self.states[li].name, label=p)
 
-			with tempfile.NamedTemporaryFile() as tf:
-				G.draw(tf.name, format='png', prog='dot')
-				img = matplotlib.image.imread(tf.name)
+			with tempfile.NamedTemporaryFile(mode='w+b') as tf:
+				G.draw(tf, format='png', prog='dot')
+				img = matplotlib.image.imread(tf)
 				plt.imshow(img)
 				plt.axis('off')
 		else:
